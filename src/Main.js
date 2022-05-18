@@ -6,7 +6,7 @@ import addIcon from './img/add_button.svg';
 import React from 'react';
 
 
-function Header() {
+function Main() {
     return (
         <main className="page__main">
             <section className="profile">
@@ -34,5 +34,5 @@ function Header() {
     );
 }
 
-export default Header;
+export default Main;
 

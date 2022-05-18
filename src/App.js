@@ -4,6 +4,7 @@ import React from 'react';
 import './App.css';
 import Header from './Header'
 import Main from './Main'
+import Footer from './Footer'
 
 function App() {
   return (
@@ -102,9 +103,7 @@ function App() {
               </div>
             </div>
           </div>
-          <footer className="footer">
-            <p className="footer__copyright">© 2022 Mesto Russia</p>
-          </footer>
+
         </div>
         <template id="card" />
       </div>
