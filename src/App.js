@@ -1,30 +1,36 @@
-import logo from './logo.svg';
+import logo from "./img/logo.svg";
+import editProfileIcon from './img/editProfile.svg';
+import avatar from './img/image.jpg';
+import closeIcon from './img/CloseIcon.svg';
+import editIcon from './img/edit.svg';
+import addIcon from './img/add_button.svg';
+import React from 'react';
 import './App.css';
 
 function App() {
   return (
-      <div>
+      <div className="root">
         <div className="page">
           <header className="header">
-            <img src="<%=require('./img/logo.svg')%>" alt="место" className="header__logo" />
+            <img src={logo} alt="место" className="header__logo" />
           </header>
           <main className="page__main">
             <section className="profile">
               <button className="button profile__button profile__button_type_change-avatar">
-                <img src="<%=require('./img/editProfile.svg')%>" className="profile__icon profile__icon_type_edit-avatar" />
-                <img src="<%=require('./img/image.jpg')%>" alt="фото пользователя" className="profile__avatar" />
+                <img src={editProfileIcon} className="profile__icon profile__icon_type_edit-avatar" />
+                <img src={avatar} alt="фото пользователя" className="profile__avatar" />
               </button>
               <div className="profile__info">
                 <div className="profile__name-block">
                   <h1 className="profile__name" />
                   <button className="button profile__button profile__button_type_edit">
-                    <img className="profile__icon profile__icon_type_edit" src="<%=require('./img/edit.svg')%>" alt="иконка редактирование" />
+                    <img className="profile__icon profile__icon_type_edit" src={editIcon} alt="иконка редактирование" />
                   </button>
                 </div>
                 <p className="profile__description" />
               </div>
               <button className="button profile__button profile__button_type_add">
-                <img className="profile__icon profile__icon_type_add" src="<%=require('./img/add_button.svg')%>" alt="плюс" />
+                <img className="profile__icon profile__icon_type_add" src={addIcon} alt="плюс" />
               </button>
             </section>
             <section className="gallery" aria-label="Фото мест">
@@ -34,7 +40,7 @@ function App() {
           <div className="popup popup_editForm close-area" visibility="hidden">
             <div className="popup__container">
               <button type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="edit-form" aria-label="Close" data-close>
-                <img className="popup__icon popup__icon_type_close close-area" src="<%=require('./img/CloseIcon.svg')%>" alt="крестик" />
+                <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />
               </button>
               <div className="popup__content">
                 <h2 className="popup__heading">Редактировать профиль</h2>
@@ -57,7 +63,7 @@ function App() {
           <div className="popup popup_addCard close-area" visibility="hidden">
             <div className="popup__container">
               <button type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="form_edit" aria-label="Close" data-close>
-                <img className="popup__icon popup__icon_type_close close-area" src="<%=require('./img/CloseIcon.svg')%>" alt="крестик" />
+                <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />
               </button>
               <div className="popup__content">
                 <h2 className="popup__heading">Новое место</h2>
@@ -80,7 +86,7 @@ function App() {
           <div className="popup popup_openImage close-area" visibility="hidden">
             <div className="popup__container popup__container_image">
               <button type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="form_add" aria-label="Close">
-                <img className="popup__icon popup__icon_type_close close-area" src="<%=require('./img/CloseIcon.svg')%>" alt="крестик" />
+                <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />
               </button>
               <figure className="popup__figure">
                 <img alt="" className="popup__img" />
@@ -91,7 +97,7 @@ function App() {
           <div className="popup popup_deleteCard close-area" visibility="hidden">
             <div className="popup__container">
               <button type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="form_edit" aria-label="Close" data-close>
-                <img className="popup__icon popup__icon_type_close close-area" src="<%=require('./img/CloseIcon.svg')%>" alt="крестик" />
+                <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />
               </button>
               <div className="popup__content">
                 <h2 className="popup__heading popup__heading_deletePopup">Вы уверены?</h2>
@@ -106,7 +112,7 @@ function App() {
           <div className="popup popup_changeAvatar close-area" visibility="hidden">
             <div className="popup__container">
               <button type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="form_edit" aria-label="Close" data-close>
-                <img className="popup__icon popup__icon_type_close close-area" src="<%=require('./img/CloseIcon.svg')%>" alt="крестик" />
+                <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />
               </button>
               <div className="popup__content">
                 <h2 className="popup__heading">Обновить аватар</h2>
