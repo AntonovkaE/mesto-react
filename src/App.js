@@ -1,4 +1,4 @@
-import logo from "./img/logo.svg";
+
 import editProfileIcon from './img/editProfile.svg';
 import avatar from './img/image.jpg';
 import closeIcon from './img/CloseIcon.svg';
@@ -6,14 +6,13 @@ import editIcon from './img/edit.svg';
 import addIcon from './img/add_button.svg';
 import React from 'react';
 import './App.css';
+import Header from './Header'
 
 function App() {
   return (
       <div className="root">
         <div className="page">
-          <header className="header">
-            <img src={logo} alt="место" className="header__logo" />
-          </header>
+          <Header />
           <main className="page__main">
             <section className="profile">
               <button className="button profile__button profile__button_type_change-avatar">
