@@ -9,10 +9,10 @@ import api from "./utils/Api";
 
 
 
-function Main (props) {
+function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
 
-    const [cards, setCard] = React.useState({name: '', link: ''})
-    //setCard([...cards, {name: '', link: '' }])
+    const [cards, setCard] = React.useState([])
+
     const [userAvatar, setUserAvatar] = React.useState('')
     const [userName, setUserName] = React.useState('ella')
     const [userDescription, setUserDescription] = React.useState('ella')
@@ -20,9 +20,9 @@ function Main (props) {
     // handleEditAvatarClick () {
     //         document.querySelector('.popup_changeAvatar').classList.add('popup_open')
     // }
-    function handleChange(isOpen, set) {
-        set(!isOpen);
-    }
+    // function handleChange(isOpen, set) {
+    //     set(!isOpen);
+    // }
 
     React.useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
@@ -30,6 +30,8 @@ function Main (props) {
                 setUserAvatar(userData.avatar);
                 setUserName(userData.name);
                 setUserDescription(userData.about);
+
+                setCard([...cards])
 
 
                 const initialCards = cards.map(item => ({
@@ -72,25 +74,42 @@ function Main (props) {
     return (
         <main className="page__main">
             <section className="profile">
-                <button  className="button profile__button profile__button_type_change-avatar">
+                <button onClick={onEditAvatar}  className="button profile__button profile__button_type_change-avatar">
                     <img src={editProfileIcon} className="profile__icon profile__icon_type_edit-avatar" />
                     <img src={userAvatar} alt="фото пользователя" className="profile__avatar" />
                 </button>
                 <div className="profile__info">
                     <div className="profile__name-block">
                         <h1 className="profile__name" >{userName} </h1>
-                        <button className="button profile__button profile__button_type_edit">
+                        <button onClick={onEditProfile} className="button profile__button profile__button_type_edit">
                             <img className="profile__icon profile__icon_type_edit" src={editIcon} alt="иконка редактирование" />
                         </button>
                     </div>
                     <p className="profile__description">{userDescription}</p>
                 </div>
-                <button className="button profile__button profile__button_type_add">
+                <button onClick={onAddPlace} className="button profile__button profile__button_type_add">
                     <img className="profile__icon profile__icon_type_add" src={addIcon} alt="плюс" />
                 </button>
             </section>
             <section className="gallery" aria-label="Фото мест">
-                <ul className="cards" />
+                <ul className="cards" >
+                    {/*добавить темплатес для карточки*/}
+                    {cards.map((card, i) => (
+                        <template id="card">
+                            <li key={i} className="cards__item card">
+                                <button type="button" className="hidden card__button card__button_delete"></button>
+                                <img alt="" className="card__img"/>
+                                <div className="card__body">
+                                    <h2 className="card__title"></h2>
+                                    <div className="card__like-area">
+                                        <button className="card__button card__button_like"></button>
+                                        <p className="card__like-counter"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                        ))}
+                </ul>
             </section>
         </main>
     );
