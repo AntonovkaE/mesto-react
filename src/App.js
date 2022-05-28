@@ -26,7 +26,7 @@ function App() {
     //     setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
     // }
 
-    function closeAllPopups() {
+    const closeAllPopups = () => {
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
         setIsEditProfilePopupOpen(false)
@@ -55,6 +55,7 @@ function App() {
                                                   <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
                                                       Сохранить
                                                   </button> </>}
+                               handleClose={closeAllPopups}
                 />
                 <PopupWithForm
                     name='addCard'
@@ -73,6 +74,7 @@ function App() {
                         <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
                         Создать </button>
                     </> }
+                    handleClose={closeAllPopups}
                         />
                 <PopupWithForm
                     name='editForm'
@@ -90,6 +92,7 @@ function App() {
                                        <button type="submit" className="button form__submit" aria-label="Сохранить" name="formSubmit">
                                             Сохранить
                                         </button> </>}
+                    handleClose={closeAllPopups}
                 />
                 <PopupImage/>
             </div>

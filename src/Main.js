@@ -17,13 +17,6 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
     const [userName, setUserName] = React.useState('ella')
     const [userDescription, setUserDescription] = React.useState('ella')
 
-    // handleEditAvatarClick () {
-    //         document.querySelector('.popup_changeAvatar').classList.add('popup_open')
-    // }
-    // function handleChange(isOpen, set) {
-    //     set(!isOpen);
-    // }
-
     React.useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
             .then(([userData, cards]) => {
