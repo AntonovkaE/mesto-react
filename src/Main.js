@@ -5,17 +5,19 @@ import avatar from './img/image.jpg';
 import editIcon from './img/edit.svg';
 import addIcon from './img/add_button.svg';
 import React from 'react';
-import api from "./utils/Api";
+import api from './utils/Api';
+import Card from './Card'
 
 
 
 function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
 
-    const [cards, setCard] = React.useState([])
+    const [cards, setCards] = React.useState([])
 
     const [userAvatar, setUserAvatar] = React.useState('')
     const [userName, setUserName] = React.useState('ella')
     const [userDescription, setUserDescription] = React.useState('ella')
+    // const [isLoading, setIsLoadiing] = React.useState(false);
 
     React.useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
@@ -24,45 +26,21 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
                 setUserName(userData.name);
                 setUserDescription(userData.about);
 
-                setCard([...cards])
-
-
-                const initialCards = cards.map(item => ({
+                setCards(cards.map(item => ({
                     name: item.name,
                     link: item.link,
                     likes: item.likes,
                     id: item._id,
                     owner: item.owner._id,
-                }));
-                // const cardsList = new Section(
-                //     {
-                //         item: initialCards,
-                //         renderer: (item) => {
-                //             const card = new Card(
-                //                 item,
-                //                 "#card",
-                //                 user._id,
-                //                 api,
-                //                 () => {
-                //                     popupOpenImage.open(item.link, item.name);
-                //
-                //                 },
-                //                 (id) => {
-                //                     popupDeleteCard.open(id);
-                //                 },
-                //             );
-                //             return card.generateCard();
-                //         },
-                //     },
-                //     selectorCardList
-                // );
-                // cardsList.renderItems()
+                })))
+
+                console.log(cards)
             })
             .catch(err => {
                 console.log(err)
             });
         // document.querySelector('.profile__avatar').style={{ backgroundImage: `url(${userAvatar})` }}
-    })
+    },[] )
 
     return (
         <main className="page__main">
@@ -88,28 +66,13 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
                 <ul className="cards" >
                     {/*добавить темплатес для карточки*/}
                     {cards.map((card, i) => (
-                        <template id="card">
-                            <li key={i} className="cards__item card">
-                                <button type="button" className="hidden card__button card__button_delete"></button>
-                                <img alt="" className="card__img"/>
-                                <div className="card__body">
-                                    <h2 className="card__title"></h2>
-                                    <div className="card__like-area">
-                                        <button className="card__button card__button_like"></button>
-                                        <p className="card__like-counter"></p>
-                                    </div>
-                                </div>
-                            </li>
-                        </template>
+                        <Card key={card.id} card={card} />
                         ))}
                 </ul>
             </section>
         </main>
     );
 
-
-    // function handleEditProfileClick () {}
-    // function handleAddPlaceClick () {}
 }
 
 
