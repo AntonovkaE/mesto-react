@@ -47,7 +47,7 @@ function App() {
                 <PopupWithForm name='changeAvatar'
                                title='Обновить аватар'
                                isOpen={isEditAvatarPopupOpen}
-                               onClose={false}
+                               onClose={closeAllPopups}
                                children={<><label htmlFor="place-input" className="form__label">
                                             <input type="url" name="avatarInput" id="avatar-input" className="form__item form__item_el_avatar" placeholder="Ссылка на аватар" minLength={2} required />
                                                       <span className="form__item-error avatar-input-error" />
@@ -55,13 +55,12 @@ function App() {
                                                   <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
                                                       Сохранить
                                                   </button> </>}
-                               handleClose={closeAllPopups}
                 />
                 <PopupWithForm
                     name='addCard'
                     title='Новое место'
                     isOpen={isAddPlacePopupOpen}
-                    onClose={false}
+                    onClose={closeAllPopups}
                     children={<><label htmlFor="place-input" className="form__label">
                         <input type="text" name="placeInput" id="place-input" className="form__item form__item_el_name"
                                placeholder="Название" maxLength={30} minLength={2} required/>
@@ -74,13 +73,12 @@ function App() {
                         <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
                         Создать </button>
                     </> }
-                    handleClose={closeAllPopups}
                         />
                 <PopupWithForm
                     name='editForm'
                     title='Редактировать профиль'
                     isOpen={isEditProfilePopupOpen}
-                    onClose={false}
+                    onClose={closeAllPopups}
                     children={<> <label htmlFor="name-input" className="form__label">
                                             <input type="text" name="nameInput" id="name-input" className="form__item form__item_el_name" placeholder="Ваше имя" maxLength={200} minLength={2} required />
                                             <span className="form__item-error name-input-error" />
@@ -92,7 +90,6 @@ function App() {
                                        <button type="submit" className="button form__submit" aria-label="Сохранить" name="formSubmit">
                                             Сохранить
                                         </button> </>}
-                    handleClose={closeAllPopups}
                 />
                 <PopupImage/>
             </div>
