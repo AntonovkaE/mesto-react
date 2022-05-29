@@ -3,7 +3,7 @@ import closeIcon from "./img/CloseIcon.svg";
 import React from 'react';
 
 
-function PopupImage({card, onClose}) {
+function ImagePopup({card, onClose}) {
     return (
         <div className={`popup popup_openImage ${card && 'popup_open'}  close-area`}>
             <div className="popup__container popup__container_image">
@@ -22,6 +22,6 @@ function PopupImage({card, onClose}) {
     );
 }
 
-export default PopupImage;
+export default ImagePopup;
 
 
