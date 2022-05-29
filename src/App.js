@@ -1,5 +1,4 @@
-import closeIcon from './img/CloseIcon.svg';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import Header from './Header'
 import Main from './Main'
@@ -12,7 +11,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-    const [selectedCard, setSelectedCard] = React.useState('')
+    const [selectedCard, setSelectedCard] = React.useState(null)
 
     const handleEditProfileClick = () => {
         setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
@@ -21,8 +20,10 @@ function App() {
     const handleEditAvatarClick = () => {
         setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
     }
-    const handleAddPlaceClick = () => {setIsAddPlacePopupOpen(!isAddPlacePopupOpen)}
-    
+    const handleAddPlaceClick = () => {
+        setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
+    }
+
     const handleCardClick = (card) => {
         setSelectedCard(card)
     }
@@ -31,7 +32,7 @@ function App() {
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
         setIsEditProfilePopupOpen(false)
-        setSelectedCard('')
+        setSelectedCard(null)
     }
 
     return (
@@ -52,12 +53,16 @@ function App() {
                                isOpen={isEditAvatarPopupOpen}
                                onClose={closeAllPopups}
                                children={<><label htmlFor="place-input" className="form__label">
-                                            <input type="url" name="avatarInput" id="avatar-input" className="form__item form__item_el_avatar" placeholder="Ссылка на аватар" minLength={2} required />
-                                                      <span className="form__item-error avatar-input-error" />
-                                                  </label>
-                                                  <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
-                                                      Сохранить
-                                                  </button> </>}
+                                   <input type="url" name="avatarInput" id="avatar-input"
+                                          className="form__item form__item_el_avatar" placeholder="Ссылка на аватар"
+                                          minLength={2} required/>
+                                   <span className="form__item-error avatar-input-error"/>
+                               </label>
+                                   <button type="submit" className="button form__submit" aria-label="Создать"
+                                           name="formSubmit">
+                                       Сохранить
+                                   </button>
+                               </>}
                 />
                 <PopupWithForm
                     name='addCard'
@@ -70,29 +75,35 @@ function App() {
                         <span className="form__item-error place-input-error"/>
                     </label>
                         <label htmlFor="url-input" className="form__label">
-                        <input type="url" id="url-input" name="urlInput" className="form__item form__item_el_url" placeholder="Ссылка на картинку" minLength={2} required />
-                        <span className="form__item-error url-input-error" />
+                            <input type="url" id="url-input" name="urlInput" className="form__item form__item_el_url"
+                                   placeholder="Ссылка на картинку" minLength={2} required/>
+                            <span className="form__item-error url-input-error"/>
                         </label>
                         <button type="submit" className="button form__submit" aria-label="Создать" name="formSubmit">
-                        Создать </button>
-                    </> }
-                        />
+                            Создать
+                        </button>
+                    </>}
+                />
                 <PopupWithForm
                     name='editForm'
                     title='Редактировать профиль'
                     isOpen={isEditProfilePopupOpen}
                     onClose={closeAllPopups}
                     children={<> <label htmlFor="name-input" className="form__label">
-                                            <input type="text" name="nameInput" id="name-input" className="form__item form__item_el_name" placeholder="Ваше имя" maxLength={200} minLength={2} required />
-                                            <span className="form__item-error name-input-error" />
-                                        </label>
-                                        <label htmlFor="description-input" className="form__label">
-                                            <input type="text" name="descriptionInput" id="description-input" className="form__item form__item_el_description" placeholder="О себе" maxLength={400} minLength={2} required />
-                                            <span className="form__item-error description-input-error" />
-                                        </label>
-                                       <button type="submit" className="button form__submit" aria-label="Сохранить" name="formSubmit">
-                                            Сохранить
-                                        </button> </>}
+                        <input type="text" name="nameInput" id="name-input" className="form__item form__item_el_name"
+                               placeholder="Ваше имя" maxLength={200} minLength={2} required/>
+                        <span className="form__item-error name-input-error"/>
+                    </label>
+                        <label htmlFor="description-input" className="form__label">
+                            <input type="text" name="descriptionInput" id="description-input"
+                                   className="form__item form__item_el_description" placeholder="О себе" maxLength={400}
+                                   minLength={2} required/>
+                            <span className="form__item-error description-input-error"/>
+                        </label>
+                        <button type="submit" className="button form__submit" aria-label="Сохранить" name="formSubmit">
+                            Сохранить
+                        </button>
+                    </>}
                 />
                 <PopupImage
                     card={selectedCard}

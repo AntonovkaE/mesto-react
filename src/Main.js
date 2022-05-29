@@ -9,8 +9,7 @@ import api from './utils/Api';
 import Card from './Card'
 
 
-
-function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
 
     const [cards, setCards] = React.useState([])
 
@@ -32,39 +31,38 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) 
                     id: item._id,
                     owner: item.owner._id,
                 })))
-
-                console.log(cards)
             })
             .catch(err => {
                 console.log(err)
             });
-    },[] )
+    }, [])
 
     return (
         <main className="page__main">
             <section className="profile">
-                <button onClick={onEditAvatar}  className="button profile__button profile__button_type_change-avatar">
-                    <img src={editProfileIcon} className="profile__icon profile__icon_type_edit-avatar" />
-                    <img src={userAvatar} alt="фото пользователя" className="profile__avatar" />
+                <button onClick={onEditAvatar} className="button profile__button profile__button_type_change-avatar">
+                    <img src={editProfileIcon} alt="иконка редактирования профиля" className="profile__icon profile__icon_type_edit-avatar"/>
+                    <img src={userAvatar ? userAvatar : avatar} alt="фото пользователя" className="profile__avatar"/>
                 </button>
                 <div className="profile__info">
                     <div className="profile__name-block">
-                        <h1 className="profile__name" >{userName} </h1>
+                        <h1 className="profile__name">{userName} </h1>
                         <button onClick={onEditProfile} className="button profile__button profile__button_type_edit">
-                            <img className="profile__icon profile__icon_type_edit" src={editIcon} alt="иконка редактирование" />
+                            <img className="profile__icon profile__icon_type_edit" src={editIcon}
+                                 alt="иконка редактирование"/>
                         </button>
                     </div>
                     <p className="profile__description">{userDescription}</p>
                 </div>
                 <button onClick={onAddPlace} className="button profile__button profile__button_type_add">
-                    <img className="profile__icon profile__icon_type_add" src={addIcon} alt="плюс" />
+                    <img className="profile__icon profile__icon_type_add" src={addIcon} alt="плюс"/>
                 </button>
             </section>
             <section className="gallery" aria-label="Фото мест">
-                <ul className="cards" >
+                <ul className="cards">
                     {cards.map((card, i) => (
-                        <Card key={card.id} card={card} onCardClick={onCardClick} />
-                        ))}
+                        <Card key={card.id} card={card} onCardClick={onCardClick}/>
+                    ))}
                 </ul>
             </section>
         </main>
