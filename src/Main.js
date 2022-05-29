@@ -10,14 +10,13 @@ import Card from './Card'
 
 
 
-function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
+function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
 
     const [cards, setCards] = React.useState([])
 
     const [userAvatar, setUserAvatar] = React.useState('')
     const [userName, setUserName] = React.useState('ella')
     const [userDescription, setUserDescription] = React.useState('ella')
-    // const [isLoading, setIsLoadiing] = React.useState(false);
 
     React.useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
@@ -39,7 +38,6 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
             .catch(err => {
                 console.log(err)
             });
-        // document.querySelector('.profile__avatar').style={{ backgroundImage: `url(${userAvatar})` }}
     },[] )
 
     return (
@@ -64,9 +62,8 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onClose}) {
             </section>
             <section className="gallery" aria-label="Фото мест">
                 <ul className="cards" >
-                    {/*добавить темплатес для карточки*/}
                     {cards.map((card, i) => (
-                        <Card key={card.id} card={card} />
+                        <Card key={card.id} card={card} onCardClick={onCardClick} />
                         ))}
                 </ul>
             </section>

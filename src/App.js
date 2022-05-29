@@ -12,6 +12,7 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState('')
 
     const handleEditProfileClick = () => {
         setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
@@ -21,15 +22,16 @@ function App() {
         setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
     }
     const handleAddPlaceClick = () => {setIsAddPlacePopupOpen(!isAddPlacePopupOpen)}
-
-    // function handleAddPlaceClick() {
-    //     setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
-    // }
+    
+    const handleCardClick = (card) => {
+        setSelectedCard(card)
+    }
 
     const closeAllPopups = () => {
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
         setIsEditProfilePopupOpen(false)
+        setSelectedCard('')
     }
 
     return (
@@ -41,6 +43,7 @@ function App() {
                     onAddPlace={handleAddPlaceClick}
                     onEditProfile={handleEditProfileClick}
                     onClose={closeAllPopups}
+                    onCardClick={handleCardClick}
 
                 />
                 <Footer/>
@@ -91,7 +94,10 @@ function App() {
                                             Сохранить
                                         </button> </>}
                 />
-                <PopupImage/>
+                <PopupImage
+                    card={selectedCard}
+                    onClose={closeAllPopups}
+                />
             </div>
 
         </div>
