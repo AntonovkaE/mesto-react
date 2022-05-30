@@ -1,11 +1,9 @@
 import React from 'react';
 
-
 function Card({card, onCardClick}) {
     function handleClick() {
         onCardClick(card);
     }
-
     return (
         <li onClick={handleClick} className="cards__item card">
             <button type="button" className="hidden card__button card__button_delete"></button>
@@ -19,9 +17,7 @@ function Card({card, onCardClick}) {
             </div>
         </li>
     );
-
 }
-
 
 export default Card;
 

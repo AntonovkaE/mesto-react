@@ -1,23 +1,20 @@
-import editProfileIcon from './img/editProfile.svg';
-import avatar from './img/image.jpg';
-
-
-import editIcon from './img/edit.svg';
-import addIcon from './img/add_button.svg';
+import editProfileIcon from '../img/editProfile.svg';
+import avatar from '../img/image.jpg';
+import editIcon from '../img/edit.svg';
+import addIcon from '../img/add_button.svg';
 import React from 'react';
-import api from './utils/Api';
+import {useEffect, useState} from 'react'
+import api from '../utils/Api';
 import Card from './Card'
-
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
 
-    const [cards, setCards] = React.useState([])
+    const [cards, setCards] = useState([])
+    const [userAvatar, setUserAvatar] = useState('')
+    const [userName, setUserName] = useState('ella')
+    const [userDescription, setUserDescription] = useState('ella')
 
-    const [userAvatar, setUserAvatar] = React.useState('')
-    const [userName, setUserName] = React.useState('ella')
-    const [userDescription, setUserDescription] = React.useState('ella')
-
-    React.useEffect(() => {
+    useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
             .then(([userData, cards]) => {
                 setUserAvatar(userData.avatar);
@@ -67,9 +64,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             </section>
         </main>
     );
-
 }
-
 
 export default Main;
 

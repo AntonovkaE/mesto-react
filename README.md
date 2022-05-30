@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# mesto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Первый проект выполненый с помощью React. В основе ледит приложение ранее созданное на ванильном JS. На данной стадии реализовано получение данных с помощью API и их отрисовка на странице
 
 ## Available Scripts
 
