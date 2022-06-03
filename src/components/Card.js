@@ -2,9 +2,12 @@ import React from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import {useContext} from "react";
 
-function Card({card, onCardClick}) {
+function Card({card, onCardClick, onCardLike}) {
     function handleClick() {
         onCardClick(card);
+    }
+    function handleLike() {
+        onCardLike(card);
     }
 
     const currentUser = useContext(CurrentUserContext)
@@ -18,12 +21,12 @@ function Card({card, onCardClick}) {
     const cardLikeButtonClassName = (`card__button card__like-button ${isLiked ? 'card__like-button_active' : 'card__like-button_inactive'} `);
     return (
         <li  className="cards__item card">
-            <button type="button" className={cardDeleteButtonClassName}></button>
+            <button type="button"  className={cardDeleteButtonClassName}></button>
             <img onClick={handleClick} src={card.link} alt={card.name} className="card__img"/>
             <div className="card__body">
                 <h2 className="card__title">{card.name}</h2>
                 <div className="card__like-area">
-                    <button className={cardLikeButtonClassName}></button>
+                    <button onClick={handleLike} className={cardLikeButtonClassName}></button>
                     <p className="card__like-counter">{card.likes.length}</p>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import PopupWithForm from './PopupWithForm'
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
+import Card from "./Card";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -39,7 +40,7 @@ function App() {
             .then(res => {
                 setCurrentUser(res)
             })
-    })
+    }, [])
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

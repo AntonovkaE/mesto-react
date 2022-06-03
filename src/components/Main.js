@@ -27,7 +27,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
                     name: item.name,
                     link: item.link,
                     likes: item.likes,
-                    id: item._id,
+                    _id: item._id,
                     owner: item.owner._id,
                 })))
             })
@@ -36,6 +36,13 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             });
     }, [])
 
+    const handleCardLike = (card) => {
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        });
+    }
 
 
     return (
@@ -62,7 +69,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             <section className="gallery" aria-label="Фото мест">
                 <ul className="cards">
                     {cards.map((card, i) => (
-                        <Card key={card.id} card={card} onCardClick={onCardClick}/>
+                        <Card onCardLike={handleCardLike} key={card.id} card={card} onCardClick={onCardClick}/>
                     ))}
                 </ul>
             </section>
