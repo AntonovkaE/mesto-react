@@ -37,8 +37,10 @@
 @import url(./blocks/card/__button/card__button.css);
 @import url(./blocks/card/__like-area/card__like-area.css);
 @import url(./blocks/card/__like-counter/card__like-counter.css);
-@import url(./blocks/card/__button/_like/card__button_like.css);
-@import url(./blocks/card/__button/_like/_active/card__button_like_active.css);
+@import url(blocks/card/like-button/card__like-button.css);
+@import url(blocks/card/like-button/_active/card__like-button_active.css);
+@import url(blocks/card/like-button/_inactive/card__like-button_inactive.css);
+@import url(blocks/card/like-button/_active/card__like-button_active.css);
 @import url(./blocks/card/__img/card__img.css);
 @import url(blocks/card/delete-button/card__delete-button.css);
 @import url(blocks/card/delete-button/_hidden/card__delete-button_hidden.css);

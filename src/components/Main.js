@@ -18,7 +18,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
 
     useEffect(() => {
         api.getInitialCards()
-            .then(([userData, cards]) => {
+            .then((cards) => {
                 // setUserAvatar(currentUser.avatar);
                 // setUserName(currentUser.name);
                 // setUserDescription(currentUser.about);
