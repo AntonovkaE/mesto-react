@@ -14,6 +14,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
     const [userName, setUserName] = useState('ella')
     const [userDescription, setUserDescription] = useState('ella')
 
+
     useEffect(() => {
         Promise.all([api.getUserData(), api.getInitialCards()])
             .then(([userData, cards]) => {
@@ -33,6 +34,8 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
                 console.log(err)
             });
     }, [])
+
+
 
     return (
         <main className="page__main">
