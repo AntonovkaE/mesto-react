@@ -5,6 +5,7 @@ import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
+import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -86,25 +87,7 @@ function App() {
                             <span className="form__item-error url-input-error"/>
                         </label>
                     </PopupWithForm>
-                    <PopupWithForm
-                        name='editForm'
-                        title='Редактировать профиль'
-                        isOpen={isEditProfilePopupOpen}
-                        onClose={closeAllPopups}
-                        submitButtonText="Сохранить"
-                    >
-                        <label htmlFor="name-input" className="form__label">
-                            <input type="text" name="nameInput" id="name-input" className="form__item form__item_el_name"
-                                   placeholder="Ваше имя" maxLength={200} minLength={2} required/>
-                            <span className="form__item-error name-input-error"/>
-                        </label>
-                        <label htmlFor="description-input" className="form__label">
-                            <input type="text" name="descriptionInput" id="description-input"
-                                   className="form__item form__item_el_description" placeholder="О себе" maxLength={400}
-                                   minLength={2} required/>
-                            <span className="form__item-error description-input-error"/>
-                        </label>
-                    </PopupWithForm>
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}

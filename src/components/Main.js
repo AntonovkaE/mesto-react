@@ -77,7 +77,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             <section className="gallery" aria-label="Фото мест">
                 <ul className="cards">
                     {cards.map((card, i) => (
-                        <Card onCardDelete={handleCardDelete} onCardLike={handleCardLike} key={card.id} card={card} onCardClick={onCardClick}/>
+                        <Card onCardDelete={handleCardDelete} onCardLike={handleCardLike} key={card._id} card={card} onCardClick={onCardClick}/>
                     ))}
                 </ul>
             </section>
