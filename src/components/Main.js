@@ -8,49 +8,9 @@ import api from '../utils/Api';
 import Card from './Card'
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick, cards, onCardDelete, onCardLike}) {
 
-    const [cards, setCards] = useState([])
-    // const [userAvatar, setUserAvatar] = useState('')
-    // const [userName, setUserName] = useState('ella')
-    // const [userDescription, setUserDescription] = useState('ella')
     const currentUser = useContext(CurrentUserContext)
-
-    useEffect(() => {
-        api.getInitialCards()
-            .then((cards) => {
-                // setUserAvatar(currentUser.avatar);
-                // setUserName(currentUser.name);
-                // setUserDescription(currentUser.about);
-
-                setCards(cards.map(item => ({
-                    name: item.name,
-                    link: item.link,
-                    likes: item.likes,
-                    _id: item._id,
-                    owner: item.owner._id,
-                })))
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }, [])
-
-    const handleCardLike = (card) => {
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-        api.changeLikeCardStatus(card._id, !isLiked)
-            .then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-        });
-    }
-
-    const handleCardDelete = (card) => {
-        api.deleteCard(card._id)
-            .then((res) => {
-                setCards((state) => state.filter(c => c._id !== card._id))
-            });
-        }
 
     return (
         <main className="page__main">
@@ -76,7 +36,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             <section className="gallery" aria-label="Фото мест">
                 <ul className="cards">
                     {cards.map((card, i) => (
-                        <Card onCardDelete={handleCardDelete} onCardLike={handleCardLike} key={card._id} card={card} onCardClick={onCardClick}/>
+                        <Card onCardDelete={onCardDelete} onCardLike={onCardLike} key={card._id} card={card} onCardClick={onCardClick}/>
                     ))}
                 </ul>
             </section>

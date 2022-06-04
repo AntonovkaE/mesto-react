@@ -18,6 +18,8 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [selectedCard, setSelectedCard] = useState(null)
     const [currentUser, setCurrentUser] = useState({})
+    const [cards, setCards] = useState([])
+
     const handleEditProfileClick = () => {
         setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
     }
@@ -28,6 +30,7 @@ function App() {
         setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
     }
     const handleCardClick = (card) => {
+        console.log(card)
         setSelectedCard(card)
     }
 
@@ -61,11 +64,44 @@ function App() {
             .catch(res => console.log("Error in promise"))
     }
 
+    const handleCardLike = (card) => {
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        api.changeLikeCardStatus(card._id, !isLiked)
+            .then((newCard) => {
+                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            });
+    }
+
+    const handleCardDelete = (card) => {
+        console.log(`card ${card}`)
+        api.deleteCard(card._id)
+            .then((res) => {
+                setCards((state) => state.filter(c => c._id !== card._id))
+            });
+    }
+
     useEffect(() => {
         api.getUserData()
             .then(res => {
                 setCurrentUser(res)
             })
+    }, [])
+
+    useEffect(() => {
+        api.getInitialCards()
+            .then((cards) => {
+                setCards(cards.map(item => ({
+                    name: item.name,
+                    link: item.link,
+                    likes: item.likes,
+                    _id: item._id,
+                    owner: item.owner._id,
+                })))
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }, [])
 
 
@@ -81,6 +117,9 @@ function App() {
                         onEditProfile={handleEditProfileClick}
                         onClose={closeAllPopups}
                         onCardClick={handleCardClick}
+                        cards={cards}
+                        onCardLike={handleCardLike}
+                        onCardDelete={handleCardDelete}
                     />
                     <Footer/>
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
