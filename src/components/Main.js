@@ -52,7 +52,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onClose, onCardClick}) {
             });
         }
 
-
     return (
         <main className="page__main">
             <section className="profile">

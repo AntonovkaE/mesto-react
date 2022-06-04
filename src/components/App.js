@@ -36,12 +36,24 @@ function App() {
         setSelectedCard(null)
     }
 
+    const handleUpdateUser = ({name, about}) => {
+        api.saveUserData(name, about)
+            .then((userData) => {
+                setCurrentUser(userData)
+            })
+            .then(res => {closeAllPopups()
+            return res})
+            .catch(res => console.log("Error in promise"))
+    }
+
     useEffect(() => {
         api.getUserData()
             .then(res => {
                 setCurrentUser(res)
             })
     }, [])
+
+
 
     return (
         <CurrentUserContext.Provider value={currentUser}>
@@ -87,7 +99,7 @@ function App() {
                             <span className="form__item-error url-input-error"/>
                         </label>
                     </PopupWithForm>
-                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+                    <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}

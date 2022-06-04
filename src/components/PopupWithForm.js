@@ -1,7 +1,7 @@
 import closeIcon from '../img/CloseIcon.svg';
 import React from 'react';
 
-function PopupWithForm({name, isOpen, onClose, title, submitButtonText, children}) {
+function PopupWithForm({name, isOpen, onClose, title, submitButtonText, onSubmit, children}) {
     return (
         <div className={`popup popup_${name} ${isOpen && 'popup_open'}   close-area`}>
             <div className="popup__container">
@@ -10,7 +10,7 @@ function PopupWithForm({name, isOpen, onClose, title, submitButtonText, children
                 </button>
                 <div className="popup__content">
                     <h2 className="popup__heading">{title}</h2>
-                    <form className="popup__form form form_edit" name={name} noValidate>
+                    <form onSubmit={onSubmit} className="popup__form form form_edit" name={name} noValidate>
                         {children}
                         <button type="submit" className="button form__submit" aria-label="Создать"
                                 name="formSubmit">

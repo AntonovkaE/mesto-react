@@ -1,23 +1,34 @@
 import PopupWithForm from "./PopupWithForm";
-import closeIcon from '../img/CloseIcon.svg';
 import React from 'react';
 import {useState, useEffect} from "react";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({isOpen, onClose}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
+    const currentUser = React.useContext(CurrentUserContext);
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
 
-    function handleNameChange(e) {
-        setName(e.target.value);
+    const handleNameChange = (e) => {
+      setName(e.target.value)
     }
 
-    function handleDescriptionChange(e) {
+    const handleDescriptionChange = (e) => {
         setDescription(e.target.value);
     }
-    const currentUser = React.useContext(CurrentUserContext);
+
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onUpdateUser({
+            name,
+            about: description,
+        });
+    }
 
     useEffect(() => {
+        console.log("montirovka")
         setName(currentUser.name);
         setDescription(currentUser.about);
     }, [currentUser]);
@@ -29,6 +40,7 @@ function EditProfilePopup({isOpen, onClose}) {
         isOpen={isOpen}
         onClose={onClose}
         submitButtonText="Сохранить"
+        onSubmit={handleSubmit}
     >
         <label htmlFor="name-input" className="form__label">
             <input value={name} onChange={handleNameChange} type="text" name="nameInput" id="name-input" className="form__item form__item_el_name"
