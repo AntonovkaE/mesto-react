@@ -6,6 +6,7 @@ import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -29,6 +30,7 @@ function App() {
     const handleCardClick = (card) => {
         setSelectedCard(card)
     }
+
     const closeAllPopups = () => {
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
@@ -43,6 +45,19 @@ function App() {
             })
             .then(res => {closeAllPopups()
             return res})
+            .catch(res => console.log("Error in promise"))
+    }
+
+    const handleUpdateAvatar = (link) => {
+        console.log(link)
+        api.changeAvatar(link)
+            .then((userData) => {
+                setCurrentUser(userData)
+            })
+            .then(res => {
+                closeAllPopups()
+                return res
+        })
             .catch(res => console.log("Error in promise"))
     }
 
@@ -68,19 +83,8 @@ function App() {
                         onCardClick={handleCardClick}
                     />
                     <Footer/>
-                    <PopupWithForm name='changeAvatar'
-                                   title='Обновить аватар'
-                                   isOpen={isEditAvatarPopupOpen}
-                                   onClose={closeAllPopups}
-                                   submitButtonText="Сохранить"
-                    >
-                        <label htmlFor="place-input" className="form__label">
-                            <input type="url" name="avatarInput" id="avatar-input"
-                                   className="form__item form__item_el_avatar" placeholder="Ссылка на аватар"
-                                   minLength={2} required/>
-                            <span className="form__item-error avatar-input-error"/>
-                        </label>
-                    </PopupWithForm>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+
                     <PopupWithForm
                         name='addCard'
                         title='Новое место'
