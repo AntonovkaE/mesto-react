@@ -10,6 +10,7 @@ import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -18,6 +19,8 @@ function App() {
     const [selectedCard, setSelectedCard] = useState(null)
     const [currentUser, setCurrentUser] = useState({})
     const [cards, setCards] = useState([])
+    const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false)
+    const [deleteCard, setDeleteCard] = useState(null)
 
     const handleEditProfileClick = () => {
         setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
@@ -31,11 +34,16 @@ function App() {
     const handleCardClick = (card) => {
         setSelectedCard(card)
     }
+    const handleCartClick = (card) => {
+        setDeleteCard(card)
+        setIsConfirmationPopupOpen(!isConfirmationPopupOpen)
+    }
 
     const closeAllPopups = () => {
         setIsAddPlacePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
         setIsEditProfilePopupOpen(false)
+        setIsConfirmationPopupOpen(false)
         setSelectedCard(null)
     }
     const handleUpdateUser = ({name, about}) => {
@@ -70,7 +78,6 @@ function App() {
             })
             .catch(res => console.log("Error in promise"))
     }
-
     const handleCardLike = (card) => {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
 
@@ -79,14 +86,13 @@ function App() {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
             });
     }
-
     const handleCardDelete = (card) => {
         api.deleteCard(card._id)
             .then((res) => {
                 setCards((state) => state.filter(c => c._id !== card._id))
-            });
+            })
+            .then(res => closeAllPopups());
     }
-
     useEffect(() => {
         api.getUserData()
             .then(res => {
@@ -125,7 +131,7 @@ function App() {
                         onCardClick={handleCardClick}
                         cards={cards}
                         onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
+                        onCardDelete={handleCartClick}
                     />
                     <Footer/>
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
@@ -134,6 +140,12 @@ function App() {
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}
+                    />
+                    <ConfirmationPopup
+                        isOpen={isConfirmationPopupOpen}
+                        onCLose={closeAllPopups}
+                        card={deleteCard}
+                        onSubmit={handleCardDelete}
                     />
                 </div>
             </div>

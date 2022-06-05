@@ -3,7 +3,7 @@ import React from 'react';
 
 function PopupWithForm({name, isOpen, onClose, title, submitButtonText, onSubmit, children}) {
     return (
-        <div className={`popup popup_${name} ${isOpen && 'popup_open'}   close-area`}>
+        <div className={`popup popup_${name} ${isOpen && 'popup_open'} close-area`}>
             <div className="popup__container">
                 <button onClick={onClose}  type="button" className="button popup__button popup__button_type_close close-area" data-bs-dismiss="edit-form" aria-label="Close" data-close>
                     <img className="popup__icon popup__icon_type_close close-area" src={closeIcon} alt="крестик" />

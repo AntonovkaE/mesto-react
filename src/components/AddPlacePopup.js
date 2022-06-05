@@ -2,7 +2,6 @@ import PopupWithForm from "./PopupWithForm";
 import React, {useState} from 'react';
 
 function AppPlacePopup({isOpen, onClose, onAddPlace}) {
-    const [card, setCards] = useState('')
     const [name, setName] = useState('')
     const [link, setLink] = useState('')
 
@@ -38,14 +37,12 @@ function AppPlacePopup({isOpen, onClose, onAddPlace}) {
             <span className="form__item-error place-input-error"/>
         </label>
         <label htmlFor="url-input" className="form__label">
-            <input onChange={handleLinkChange} type="url" id="url-input" name="urlInput"
+            <input  onChange={handleLinkChange} type="url" id="url-input" name="urlInput"
                    className="form__item form__item_el_url"
                    placeholder="Ссылка на картинку" minLength={2} required/>
             <span className="form__item-error url-input-error"/>
         </label>
     </PopupWithForm>)
-
 }
-
 
 export default AppPlacePopup;

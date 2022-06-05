@@ -14,7 +14,6 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
     }
     const currentUser = useContext(CurrentUserContext)
     const isOwn = (card.owner._id == currentUser._id)
-
     const cardDeleteButtonClassName = (
         `card__button card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
     );
