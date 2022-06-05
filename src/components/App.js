@@ -4,13 +4,11 @@ import '../App.css';
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import PopupWithForm from './PopupWithForm'
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
-import Card from "./Card";
 import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
@@ -31,7 +29,6 @@ function App() {
         setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
     }
     const handleCardClick = (card) => {
-        console.log(card)
         setSelectedCard(card)
     }
 
@@ -41,7 +38,6 @@ function App() {
         setIsEditProfilePopupOpen(false)
         setSelectedCard(null)
     }
-
     const handleUpdateUser = ({name, about}) => {
         api.saveUserData(name, about)
             .then((userData) => {
@@ -65,8 +61,9 @@ function App() {
     }
 
     const handleAddPlace = ({name, link, likes}) => {
-        api.saveNewCard(name, link, likes)
-            .then(newCard => setCards([newCard, ...cards]))
+        api.saveNewCard(name, link, likes, currentUser._id)
+            .then(newCard => {setCards([newCard, ...cards])
+            return newCard})
             .then(res => {
                 closeAllPopups()
                 return res
@@ -84,7 +81,6 @@ function App() {
     }
 
     const handleCardDelete = (card) => {
-        console.log(`card ${card}`)
         api.deleteCard(card._id)
             .then((res) => {
                 setCards((state) => state.filter(c => c._id !== card._id))
@@ -100,13 +96,13 @@ function App() {
 
     useEffect(() => {
         api.getInitialCards()
-            .then((cards) => {
+            .then(cards => {
                 setCards(cards.map(item => ({
                     name: item.name,
                     link: item.link,
                     likes: item.likes,
                     _id: item._id,
-                    owner: item.owner._id,
+                    owner: item.owner,
                 })))
             })
             .catch(err => {

@@ -18,7 +18,7 @@ class Api {
     });
   }
 
-  saveNewCard(nameInput, linkInput, likes) {
+  saveNewCard(nameInput, linkInput, likes, currentUser) {
     return fetch(this._baseUrl + "/cards", {
       method: "POST",
       headers: this._headers,
@@ -26,6 +26,7 @@ class Api {
         name: nameInput,
         link: linkInput,
         likes: likes,
+        owner: currentUser._id
       }),
     }).then((res) => {
       return this._checkPromise(res);

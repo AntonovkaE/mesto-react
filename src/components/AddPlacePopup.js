@@ -1,9 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
 import React, {useState} from 'react';
-import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function AppPlacePopup({isOpen, onClose, onAddPlace}) {
-    const currentUser = React.useContext(CurrentUserContext);
     const [card, setCards] = useState('')
     const [name, setName] = useState('')
     const [link, setLink] = useState('')
@@ -21,16 +19,9 @@ function AppPlacePopup({isOpen, onClose, onAddPlace}) {
         onAddPlace({
             name,
             link,
-            likes: []
+            likes: [],
         });
     }
-
-    // useEffect(() => {
-    //     console.log("montirovka")
-    //     setName(currentUser.name);
-    //     set(currentUser.about);
-    // }, [currentUser]);
-
 
     return (<PopupWithForm
         name='addCard'

@@ -1,6 +1,5 @@
 import PopupWithForm from "./PopupWithForm";
-import React from 'react';
-import {useState, useEffect} from "react";
+import React, {useEffect, useState} from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
@@ -9,13 +8,11 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     const [description, setDescription] = useState('')
 
     const handleNameChange = (e) => {
-      setName(e.target.value)
+        setName(e.target.value)
     }
-
     const handleDescriptionChange = (e) => {
         setDescription(e.target.value);
     }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         onUpdateUser({
@@ -23,13 +20,10 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
             about: description,
         });
     }
-
     useEffect(() => {
-        console.log("montirovka")
         setName(currentUser.name);
         setDescription(currentUser.about);
     }, [currentUser]);
-
 
     return (<PopupWithForm
         name='editForm'
@@ -40,21 +34,18 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
         onSubmit={handleSubmit}
     >
         <label htmlFor="name-input" className="form__label">
-            <input value={name} onChange={handleNameChange} type="text" name="nameInput" id="name-input" className="form__item form__item_el_name"
+            <input value={name || ''} onChange={handleNameChange} type="text" name="nameInput" id="name-input"
+                   className="form__item form__item_el_name"
                    placeholder="Ваше имя" maxLength={200} minLength={2} required/>
             <span className="form__item-error name-input-error"/>
         </label>
         <label htmlFor="description-input" className="form__label">
-            <input value={description} onChange={handleDescriptionChange} type="text" name="descriptionInput" id="description-input"
+            <input value={description || ''} onChange={handleDescriptionChange} type="text" name="descriptionInput"
+                   id="description-input"
                    className="form__item form__item_el_description" placeholder="О себе" maxLength={400}
                    minLength={2} required/>
             <span className="form__item-error description-input-error"/>
         </label>
     </PopupWithForm>)
-
 }
-
-
-
-
 export default EditProfilePopup;
