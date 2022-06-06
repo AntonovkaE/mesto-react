@@ -48,35 +48,27 @@ function App() {
     }
     const handleUpdateUser = ({name, about}) => {
         api.saveUserData(name, about)
-            .then((userData) => {
-                setCurrentUser(userData)
-            })
-            .then(res => {closeAllPopups()
-            return res})
-            .catch(res => console.log("Error in promise"))
+            .then(uploadUserData)
+            .catch(res => console.log(res))
+    }
+    const uploadUserData = (userData) => {
+        setCurrentUser(userData);
+        closeAllPopups()
+        return userData
     }
 
     const handleUpdateAvatar = (link) => {
         api.changeAvatar(link)
-            .then((userData) => {
-                setCurrentUser(userData)
-            })
-            .then(res => {
-                closeAllPopups()
-                return res
-        })
-            .catch(res => console.log("Error in promise"))
+            .then(uploadUserData)
+            .catch(res => console.log(res))
     }
 
-    const handleAddPlace = ({name, link, likes}) => {
-        api.saveNewCard(name, link, likes, currentUser._id)
+    const handleAddPlace = ({name, link}) => {
+        api.saveNewCard(name, link)
             .then(newCard => {setCards([newCard, ...cards])
-            return newCard})
-            .then(res => {
                 closeAllPopups()
-                return res
-            })
-            .catch(res => console.log("Error in promise"))
+            return newCard})
+            .catch(res => console.log(res))
     }
     const handleCardLike = (card) => {
         const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -84,20 +76,23 @@ function App() {
         api.changeLikeCardStatus(card._id, !isLiked)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
+            })
+            .catch(res => console.log(res));
     }
     const handleCardDelete = (card) => {
         api.deleteCard(card._id)
             .then((res) => {
                 setCards((state) => state.filter(c => c._id !== card._id))
+                closeAllPopups()
             })
-            .then(res => closeAllPopups());
+            .catch(res => console.log(res));
     }
     useEffect(() => {
         api.getUserData()
             .then(res => {
                 setCurrentUser(res)
             })
+            .catch(res => console.log(res));
     }, [])
 
     useEffect(() => {
@@ -115,9 +110,7 @@ function App() {
                 console.log(err)
             });
     }, [])
-
-
-
+    
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="root">
