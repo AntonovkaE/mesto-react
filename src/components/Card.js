@@ -17,7 +17,6 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
     const cardDeleteButtonClassName = (
         `card__button card__delete-button ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
     );
-
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     const cardLikeButtonClassName = (`card__button card__like-button ${isLiked ? 'card__like-button_active' : 'card__like-button_inactive'} `);
     return (
@@ -34,6 +33,5 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
         </li>
     );
 }
-
 export default Card;
 

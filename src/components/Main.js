@@ -3,8 +3,7 @@ import avatar from '../img/image.jpg';
 import editIcon from '../img/edit.svg';
 import addIcon from '../img/add_button.svg';
 import React from 'react';
-import {useEffect, useState, useContext} from 'react'
-import api from '../utils/Api';
+import {useContext} from 'react'
 import Card from './Card'
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 

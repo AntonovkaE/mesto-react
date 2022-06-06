@@ -32,14 +32,11 @@ function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
     >
         <label htmlFor="place-input" className="form__label">
             <input ref={avatarLink}
-                onChange={handleLink} type="url" name="avatarInput" id="avatar-input"
+                   onChange={handleLink} type="url" name="avatarInput" id="avatar-input"
                    className="form__item form__item_el_avatar" placeholder="Ссылка на аватар"
                    minLength={2} required/>
             <span className="form__item-error avatar-input-error"/>
         </label>
     </PopupWithForm>)
-
 }
-
-
 export default EditProfilePopup;

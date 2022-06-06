@@ -10,7 +10,7 @@ function PopupWithForm({name, isOpen, onClose, title, submitButtonText, onSubmit
                 </button>
                 <div className="popup__content">
                     <h2 className="popup__heading">{title}</h2>
-                    <form onSubmit={onSubmit} className="popup__form form form_edit" name={name} noValidate>
+                    <form onSubmit={onSubmit} className="popup__form form form_edit" name={name}>
                         {children}
                         <button type="submit" className="button form__submit" aria-label="Создать"
                                 name="formSubmit">

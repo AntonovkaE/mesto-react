@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 import '../App.css';
 import Header from './Header'
 import Main from './Main'
@@ -65,9 +64,11 @@ function App() {
 
     const handleAddPlace = ({name, link}) => {
         api.saveNewCard(name, link)
-            .then(newCard => {setCards([newCard, ...cards])
+            .then(newCard => {
+                setCards([newCard, ...cards])
                 closeAllPopups()
-            return newCard})
+                return newCard
+            })
             .catch(res => console.log(res))
     }
     const handleCardLike = (card) => {
@@ -110,7 +111,7 @@ function App() {
                 console.log(err)
             });
     }, [])
-    
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="root">
@@ -127,9 +128,11 @@ function App() {
                         onCardDelete={handleCartClick}
                     />
                     <Footer/>
-                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-                    <AddPlacePopup onAddPlace={handleAddPlace} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
-                    <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}
+                                     onUpdateAvatar={handleUpdateAvatar}/>
+                    <AddPlacePopup onAddPlace={handleAddPlace} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
+                    <EditProfilePopup onUpdateUser={handleUpdateUser} isOpen={isEditProfilePopupOpen}
+                                      onClose={closeAllPopups}/>
                     <ImagePopup
                         card={selectedCard}
                         onClose={closeAllPopups}
@@ -143,7 +146,6 @@ function App() {
                 </div>
             </div>
         </CurrentUserContext.Provider>
-
     );
 }
 
