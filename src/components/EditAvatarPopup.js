@@ -1,23 +1,13 @@
 import PopupWithForm from "./PopupWithForm";
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
-    const currentUser = React.useContext(CurrentUserContext);
-    const [avatar, setAvatar] = useState('')
-
     const avatarLink = React.useRef()
     const handleSubmit = (e) => {
         e.preventDefault();
-        onUpdateAvatar(avatar);
+        onUpdateAvatar(avatarLink.current.value);
     }
-    const handleLink = () => {
-        setAvatar(avatarLink.current.value)
-    }
-
-    useEffect(() => {
-        setAvatar(currentUser.avatar);
-    }, [currentUser]);
 
     useEffect(() => {
         avatarLink.current.value = ''
@@ -32,7 +22,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
     >
         <label htmlFor="place-input" className="form__label">
             <input ref={avatarLink}
-                   onChange={handleLink} type="url" name="avatarInput" id="avatar-input"
+                   type="url" name="avatarInput" id="avatar-input"
                    className="form__item form__item_el_avatar" placeholder="Ссылка на аватар"
                    minLength={2} required/>
             <span className="form__item-error avatar-input-error"/>
