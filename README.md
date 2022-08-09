@@ -23,3 +23,5 @@
 Собирает приложение в папку build.
 
 Проект сдан.
+
+[Ссылка на GitHub Pages](https://antonovkae.github.io/mesto-react/)
